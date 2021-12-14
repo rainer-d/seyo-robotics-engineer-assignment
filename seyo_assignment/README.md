@@ -1,4 +1,4 @@
-This package was created with ROS Melodic and Gazebo 9.0 and includes a two wheeled robot model that can navigate the simulated blue path in Seyo.world.
+This package was created with ROS Melodic & Gazebo 9.0 and includes a two wheeled robot model that can navigate the simulated blue path in Seyo.world.
 
 The robot model is controlled and simulated with the following ROS nodes:
 1) /sim_model
