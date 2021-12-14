@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<launch>
+ <!-- launch file arguments -->
+  <arg name="debug" default="false"/>
+  <arg name="gui" default="false"/>
+  <arg name="paused" default="false"/>
+  <arg name="world" default="$(find seyo_assignment)/world/seyo.world"/>
+
+  <arg name="x" default="0.0"/>
+  <arg name="y" default="0.0"/>
+  <arg name="z" default="0.4"/>
+
+  <param name="robot_description" textfile="$(find seyo_assignment)/urdf/robot_model.urdf"/>
+  
+  
+  <!-- This launch file launches seyo.world -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="$(arg world)"/>
+    <arg name="paused" value="false"/>
+    <arg name="use_sim_time" value="true"/>
+    <arg name="gui" value="true"/>
+    <arg name="recording" value="false"/>
+    <arg name="debug" value="false"/> 
+  </include>
+
+  <!--   <include file="$(find seyo_assignment)/launch/spawn_robot.launch" /> -->    
+  <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen" args="-urdf -param robot_description -model sim_model -x $(arg x) -y $(arg y) -z $(arg z)"/>
+
+  <!-- loads the controllers -->
+  <rosparam file="$(find seyo_assignment)/config/config.yaml" command="load"/>
+  <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen" ns="/sim_model" args="base_to_right_motor_controller base_to_left_motor_controller joint_state_controller"/> 
+  <!-- convert joint states to TF transforms -->
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" respawn="false" output="screen">
+      <remap from="/joint_states" to="/sim_model/joint_states"/>
+  </node>
+
+  <node pkg="seyo_assignment" type="robot_controller" name="robot_controller" output="screen"/>
+
+  <node pkg="seyo_assignment" type="rotation_calcs" name="rotation_calcs" output="screen"/>
+</launch>

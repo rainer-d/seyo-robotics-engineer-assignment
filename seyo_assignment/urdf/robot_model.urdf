@@ -1,0 +1,229 @@
+<?xml version="1.0" ?>
+<robot name="my_robot">
+  <material name="red">
+        <color rgba="0.8 0.0 0.0 1.0"/>
+  </material>
+
+  <link name="base_footprint"/>
+  <link name="robot_base">
+    <inertial>
+      <mass value="1"/>
+      <inertia ixx="0.0020833333" ixy="0" ixz="0" iyy="0.0054166666" iyz="0" izz="0.0070833333"/>
+    </inertial>
+    <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0" />
+    <collision name="my_robot__collision">
+      <geometry>
+        <box size="0.25 0.15 0.05"/>
+      </geometry>
+    </collision>
+    <visual name="my_robot__visual">
+      <geometry>
+        <box size="0.25 0.15 0.05"/>
+      </geometry>
+      <material name="red"/>
+    </visual>
+  </link>
+  <link name="right_wheel">
+    <inertial>
+      <mass value="0.1"/>
+      <inertia ixx="4.75e-05" ixy="0" ixz="0" iyy="4.75e-05" iyz="0" izz="0.00008"/>
+    </inertial>
+    <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0" />
+    <collision name="my_robot__collision">
+      <geometry>
+        <cylinder length="0.03" radius="0.04"/>
+      </geometry>
+    </collision>
+    <visual name="my_robot__visual">
+      <geometry>
+        <cylinder length="0.03" radius="0.04"/>
+      </geometry>
+    </visual>
+  </link>
+  <link name="left_wheel">
+    <inertial>
+      <mass value="0.1"/>
+      <inertia ixx="4.75e-05" ixy="0" ixz="0" iyy="4.75e-05" iyz="0" izz="0.00008"/>
+    </inertial>
+    <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0" />
+    <collision name="my_robot__collision">
+      <geometry>
+        <cylinder length="0.03" radius="0.04"/>
+      </geometry>
+    </collision>
+    <visual name="my_robot__visual">
+      <geometry>
+        <cylinder length="0.03" radius="0.04"/>
+      </geometry>
+    </visual>
+  </link>
+  <link name="back_caster">
+    <inertial>
+      <mass value="0.002"/>
+      <inertia ixx="4.83e-08" ixy="0" ixz="0" iyy="4.5e-08" iyz="0" izz="4.5e-08"/>
+    </inertial>
+    <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0" />
+    <collision name="my_robot__collision">
+      <geometry>
+        <sphere radius="0.0075"/>
+      </geometry>
+    </collision>
+    <visual name="my_robot__visual">
+      <geometry>
+        <sphere radius="0.0075"/>
+      </geometry>
+    </visual>
+  </link>
+  <link name="front_caster">
+    <inertial>
+      <mass value="0.002"/>
+      <inertia ixx="4.5e-08" ixy="0" ixz="0" iyy="4.5e-08" iyz="0" izz="4.5e-08"/>
+    </inertial>
+    <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0" />
+    <collision name="my_robot__collision">
+      <geometry>
+        <sphere radius="0.0075"/>
+      </geometry>
+    </collision>
+    <visual name="my_robot__visual">
+      <geometry>
+        <sphere radius="0.0075"/>
+      </geometry>
+    </visual>
+  </link>
+  <link name="front_indication">
+    <inertial>
+      <mass value="0.001"/>
+      <inertia ixx="2.1e-07" ixy="0" ixz="0" iyy="2.83e-07" iyz="0" izz="7.71e-08"/>
+    </inertial>
+    <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0" />
+    <collision name="my_robot__collision">
+      <geometry>
+        <box size="0.03 0.03 0.005"/>
+      </geometry>
+    </collision>
+    <visual name="my_robot__visual">
+      <geometry>
+        <box size="0.03 0.03 0.005"/>
+      </geometry>
+    </visual>
+  </link>
+
+  <joint name="robot_base_to_front_caster" type="fixed">
+    <parent link="robot_base"/>
+    <child link="front_caster"/>
+    <origin rpy="0 0 0" xyz="0.115 0.0 -0.0325"/>
+    <limit effort="1.0" lower="-1.79769e+308" upper="1.79769e+308" velocity="1.0"/>
+  </joint>
+  <joint name="robot_base_to_back_caster" type="fixed">
+    <parent link="robot_base"/>
+    <child link="back_caster"/>
+    <origin rpy="0 0 0" xyz="-0.115 0.0 -0.0325"/>
+    <limit effort="1.0" lower="-1.79769e+308" upper="1.79769e+308" velocity="1.0"/>
+  </joint>
+  <joint name="robot_base_to_right_wheel" type="continuous">
+    <parent link="robot_base"/>
+    <child link="right_wheel"/>
+    <origin rpy="1.5708 0 0" xyz="0.0 -0.09 0.0"/>
+    <axis xyz="0 0 1"/>
+    <!--<dynamics damping="0.01"/> -->
+    <limit effort="1.0" lower="-1.79769e+308" upper="1.79769e+308" velocity="1.0"/>
+  </joint>
+  <joint name="robot_base_to_left_wheel" type="continuous">
+    <parent link="robot_base"/>
+    <child link="left_wheel"/>
+    <origin rpy="1.5708 0 0" xyz="0.0 0.09 0.0"/>
+    <axis xyz="0 0 1"/>
+    <!--<dynamics damping="0.01"/> -->
+    <limit effort="1.0" lower="-1.79769e+308" upper="1.79769e+308" velocity="1.0"/>
+  </joint>
+  <joint name="base_footprint_joint" type="fixed">
+    <parent link="base_footprint"/>
+    <child link="robot_base"/>
+    <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.04"/>
+  </joint>
+  <joint name="robot_base_front_ind" type="fixed">
+    <parent link="robot_base"/>
+    <child link="front_indication"/>
+    <origin rpy="0.0 0.0 0.7852" xyz="0.09 0.0 0.0275"/>
+  </joint>
+
+  <!-- ROS Control plugin for Gazebo -->
+  <gazebo>
+    <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+      <robotNamespace>/sim_model</robotNamespace>
+    </plugin>
+  <!--</gazebo>
+
+  <gazebo> -->
+    <plugin name="differential_drive_controller" filename="libgazebo_ros_diff_drive.so">
+      <robotNamespace>/sim_model</robotNamespace>
+      <alwaysOn>true</alwaysOn>
+      <legacyMode>false</legacyMode>
+      <updateRate>20</updateRate>
+      <leftJoint>robot_base_to_left_wheel</leftJoint>
+      <rightJoint>robot_base_to_right_wheel</rightJoint>
+      <wheelSeparation>0.21</wheelSeparation>
+      <wheelDiameter>0.08</wheelDiameter>
+      <torque>1</torque>
+      <commandTopic>cmd_vel</commandTopic>
+      <odometryTopic>odom</odometryTopic>
+      <odometryFrame>odom</odometryFrame>
+      <robotBaseFrame>base_footprint</robotBaseFrame>
+    </plugin>
+  </gazebo>
+
+  <gazebo reference="right_wheel">
+    <mu1>1</mu1>
+    <mu2>1</mu2>
+    <turnGravityOff>false</turnGravityOff>
+    <material>Gazebo/Black</material>
+  </gazebo>
+
+  <gazebo reference="left_wheel">
+    <mu1>1</mu1>
+    <mu2>1</mu2>
+    <turnGravityOff>false</turnGravityOff>
+    <material>Gazebo/Black</material>
+  </gazebo>
+
+  <gazebo reference="right_caster">
+    <mu1>0</mu1>
+    <mu2>0</mu2>
+    <turnGravityOff>false</turnGravityOff>
+    <material>Gazebo/Black</material>
+  </gazebo>
+
+  <gazebo reference="back_caster">
+    <mu1>0</mu1>
+    <mu2>0</mu2>
+    <turnGravityOff>false</turnGravityOff>
+    <material>Gazebo/Black</material>
+  </gazebo>
+
+  <gazebo reference="front_indication">
+    <material>Gazebo/Black</material>
+    <turnGravityOff>false</turnGravityOff>
+  </gazebo>
+
+  <!-- transmission elements for the front right and front left wheels-->
+  <transmission name="right_wheel_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="robot_base_to_left_wheel">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="left_motor">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="left_wheel_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="robot_base_to_right_wheel">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="right_motor">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+</robot>

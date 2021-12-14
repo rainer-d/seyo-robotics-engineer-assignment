@@ -1,0 +1,7 @@
+#This service in the angular pose (geometry_msgs/TwistWithCovariance twist?)
+geometry_msgs/PoseWithCovariance pose
+---
+#And returns 3 output robot orientation angles in degrees:
+float32 roll 
+float32 pitch 
+float32 yaw
