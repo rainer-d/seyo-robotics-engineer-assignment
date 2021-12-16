@@ -11,7 +11,7 @@ To run the project:
 1. Ensure that all the nodes have the required executable permission using the "chmod +x" command.
 2. Run the launch file "roslaunch seyo_assignment seyo_assignment.launch" to start all the nodes and to position the robot model at the starting position within seyo.world.
 3. In a new terminal, the following commands can be issued in order to:
-- Drive the robot model forward by a specified distance in metres: "rostopic pub -1 /userCommands seyo_assignment/user_commands fwd 1.0" (this will drive the robot foward by 1 metre)
+- Drive the robot model forward by a specified distance in metres: "rostopic pub -1 /userCommands seyo_assignment/user_commands fwd 1.0" (this will drive the robot forward by 1 metre)
 - Turn the robot model 90 degrees left: "rostopic pub -1 /userCommands seyo_assignment/user_commands left 0" (the number is needed to satisfy the argument inputs but the value is ignored in the code)
 - Turn the robot model 90 degrees right: "rostopic pub -1 /userCommands seyo_assignment/user_commands right 0" (the number is needed to satisfy the argument inputs but the value is ignored in the code)
 
