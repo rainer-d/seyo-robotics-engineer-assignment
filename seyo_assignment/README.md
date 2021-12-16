@@ -8,7 +8,7 @@ The robot model is controlled and simulated with the following ROS nodes:
 5) /robot_state_publisher
 
 To run the project:
-1. Ensure that all the nodes have the required exacutable permission using the "chmod +x" command.
+1. Ensure that all the nodes have the required executable permission using the "chmod +x" command.
 2. Run the launch file "roslaunch seyo_assignment seyo_assignment.launch" to start all the nodes and to position the robot model at the starting position within seyo.world.
 3. In a new terminal, the following commands can be issued in order to:
 - Drive the robot model forward by a specified distance in metres: "rostopic pub -1 /userCommands seyo_assignment/user_commands fwd 1.0" (this will drive the robot foward by 1 metre)
